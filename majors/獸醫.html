@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- 這裡要改頁面標題 -->
+    <title>學類 獸醫</title>
+
+    <link rel="stylesheet" href="../global.css">
+    <link rel="stylesheet" href="../index.css">
+
+    <script>
+        //控制畫面首次載入將第一個按鈕設定選中
+        window.onload = function () {
+            const firstButton = document.querySelector('.tabButton');
+            if (firstButton) {
+                //'intro'要根據下面各個分頁的內容存放的類別改名
+                setActive(firstButton, 'intro');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const hint = document.querySelector('#hint')
+            const hintText = hint.querySelector('.hint')
+            const contentContainer = document.querySelector('#content');
+
+            //使用事件委派處理 hover 效果，確保動態生成的元素也有效
+            contentContainer.addEventListener('mouseover', (e) => {
+                const target = e.target.closest('.hoverTarget')
+                if (target) {
+                    // 滑鼠進入時顯示提示板塊和設定提示板塊的內容
+                    const content = target.dataset.hint
+                    hintText.innerHTML = content
+                    hint.style.display = 'block'
+                }
+            });
+
+            //根據滑鼠位置和 10px 偏移量決定提示板塊顯示位置
+            contentContainer.addEventListener('mousemove', (e) => {
+                hint.style.top = (e.clientY + 10) + 'px'
+                hint.style.left = (e.clientX + 10) + 'px'
+            });
+
+            //滑鼠離開時再次隱藏提示板塊和內容
+            contentContainer.addEventListener('mouseout', (e) => {
+                const toElement = e.relatedTarget
+                if (!toElement || !toElement.closest('.hoverTarget')) {
+                    hint.style.display = 'none'
+                    hintText.innerHTML = ''
+                }
+            })
+        })
+
+        function setActive(clickedButton, contentKey) {
+            const buttons = document.querySelectorAll('.tabButton')
+            buttons.forEach(btn => btn.classList.remove('active'))
+            clickedButton.classList.add('active')
+
+            const content = document.getElementById("content")
+
+            //各個分頁的內容存放
+            const contentMap = {
+                intro: `
+                        <p class="title">這個學類學什麼？</p>
+                        <p>獸醫學是預防、診斷、治療動物健康問題的學門知識，除了處理各種動物疾病、發展疾病診療技術之外，各類傳染病的防治與監控、畜產品的安全與衛生保障、動物福利的促進等也包含其中。
+                            學習內容涉及「伴侶動物、野生動物、實驗動物及家畜禽等經濟動物與水產動物之疾病預防、診斷與治療、公共衛生、動物相關法規與倫理」等領域。
+                            如果你學習獸醫學類，你可以了解許多基礎、副臨床醫學，例如解剖生理病理、微生物、免疫及公衛等課程。將學到的知識統整運用，進入臨床課程後知道如何從理化學、血液、影像學等檢驗結果初步判斷這隻動物的狀態、如何在許多外科手術和內科用藥的選項之間選擇最適合那隻動物的治療方式。除了犬、貓的疾病之外，也會對其他動物及其好發疾病的診治，甚至是和人類本身相關的人畜共通傳染病等有更多的認識。</p>
+
+                        <p class="title">相似學類比一比</p>
+                        <p>本學類主要著重於動物疾病醫療診治、生產醫學、臨床醫學及基礎醫學研究。<br>
+                            本學類容易與動物科學學類搞混。<br>
+                            動物科學學類：著重動物飼養、育種與生產，惟因許多動物疾病的起因與飼養管理有關，因此獸醫對此方面知識仍須有所涉獵。</p>
+
+                        <p class="title">適合本科系的特質</p>
+                        <p>就要你能夠冷靜有條理的對事物進行判斷，嚴謹而周詳的提供解決問題的建議，並且建立能夠與他人合作協同處理事情的能力，願意多方的學習新的醫學知識與技術。</p>
+
+                        <p class="title">你所不知道的大學生活</p>
+                        <p>
+                        <ul>
+                            <li>在進入臨床疾病防治課程之前，會先學習各方面的基礎知識課程，包括和醫療沒有直接相關的遺傳學、統計學等，之後再逐漸歸納所學，應用在診斷治療
+                            <li>若對於疾病研究、基礎研究有興趣，也有許多不同主題的實驗室等著你的興趣加入
+                            <li>各種選修課程及實習，讓同學們能夠有除了狗貓之外的接觸其他種類動物及配合出國拓展視野的機會，只要有興趣你也可以成為治療爬蟲類等特殊寵物或動物園野生動物的專科醫生，也可和世界各地的獸醫師、獸醫學生互相交流學習
+                            <li>診療實習時面對緊張的動物可能會有被咬傷、抓傷的危險，如何安全地保定動物、正確判斷動物當下的情緒表現也是學習目標之一
+                            <li>實習內容也包含屍體解剖，除了正確的解剖步驟外，也學習從肉眼觀察到巨觀病變，配合檢體採樣進行微觀的顯微病理診斷
+                        </ul>
+                        </p>
+                        <p class="title">興趣類型</p>
+                        <div class="infoBookmark">
+                            <div class="buttonArea">
+                                <button class="labelButton labelButtonActive"
+                                    onclick="setBookmark(this, 'IS')">身心保健(IS)</button>
+                                <button class="labelButton" onclick="setBookmark(this, 'IR')">科技研發(IR)</button>
+                                <button class="labelButton" onclick="setBookmark(this, 'AI')">美術設計(AI)</button>
+                                <button class="labelButton" onclick="setBookmark(this, 'SR')">健康促進(SR)</button>
+                            </div>
+                            <div class="contentArea">
+                                <!-- 這裡放載入的時候要顯示的，跟第一個標籤相同內容 -->
+                                <p>喜歡觀察紀錄事物，行為與思考有時以研究規劃為導向，關懷生命，有興趣於生物及人類行為的研究並與別人討論。頗熱衷人際關係的問題或新的管理方式，在工作時常會提出問題解決方案，但不喜歡扮演決策或執行的角色。喜歡融入人群，樂觀而不喜歡競爭，人際關係良好，擅於傾聽與幫助別人，是個好的支援者。</p>
+                            </div>
+                        </div>
+
+                        <p class="title">不可不知的知識領域</p>
+                        <p><span class="hoverTarget"
+                            data-hint="關於診斷、疾病治療、失能等所需資訊和技術等知識，包括症狀、治療方式、藥物性質及其與人體相互作用、預防保健措施等">醫學</span>
+                        <span class="hoverTarget"
+                            data-hint="關於化學組成、結構、物性、化學過程與轉化等知識，包括使用化學藥品及化學作用、危險標誌、生產技術和廢棄物處理等">化學</span>
+                        <span class="hoverTarget"
+                            data-hint="關於植物、動物等有機體的組織、細胞、功能、相互依存性及其彼此間與環境相互作用的知識">生命科學</span>
+                        <span class="hoverTarget"
+                            data-hint="關於某一外國之語文結構與內容及該國文學的知識，包括文字意義、拼音、發音及文法，以及文學作品賞析">外國語文</span>
+                        </p>
+
+                        <p class="title">必修或核心課程？</p>
+                        <p>
+                        <ul>
+                            <li>基礎獸醫學：獸醫解剖、生理學、組織學、細菌、病毒、免疫、寄生蟲等
+                            <li>副臨床獸醫學：獸醫病理學、獸醫藥理學、獸醫公共衛生學等
+                            <li>臨床獸醫學：小動物內、外、產科學及實習、獸醫影像學及實習、經濟動物（豬、禽）、大動物疾病學（牛、羊、鹿）、野生動物疾病、診療實習、臨床病例討論等
+                        </ul>
+                        </p>
+
+                        <p class="title">有哪些可能的誤解？</p>
+                        <p><span class="hoverTarget"
+                                data-hint="除了動物的養殖生產問題外，獸醫更專注在動物的醫療診治上。">類似動物科學類 !?</span></p>
+                        <p><span class="hoverTarget"
+                                data-hint="動物種類眾多，各種別的動物相關知識均需涉獵。">只要學習犬貓等常見動物醫治 !?</span></p>
+                        <p><span class="hoverTarget"
+                                data-hint="新進獸醫責任大工時長，直到具獨當一面能力時，工作與薪資方成正比。">起薪高 !?</span></p>
+                        <p><span class="hoverTarget"
+                                data-hint="除了在診所看診的臨床獸醫師之外，還包括公務獸醫師、實驗動物獸醫師、經濟動物獸醫師、病理獸醫師、動物藥品業務、學術及教學研究等各式各樣的選擇。">畢業之後只能當臨床獸醫師 !?</span></p>
+                                
+                        `,
+                road: `
+                        <p class="title title2">業務／貿易／銷售</p>
+                        <!-- 這是切換標籤 -->
+                        <div class="infoBookmark">
+                            <div class="buttonArea">
+                                <button class="labelButton labelButtonActive"
+                                    onclick="setBookmark(this, 'job1')">醫藥業務代表</button>
+                                <!-- 擴充方式同上，setBookmark(this, '標籤')避免一樣的標籤名稱 -->
+                            </div>
+                            <div class="contentArea">
+                                <!-- 這裡放載入的時候要顯示的，跟第一個標籤相同內容 -->
+                                <p class="title">性格特質：</p>
+                                <p>負責公司醫療器材產品與各類藥品之業務推廣。</p>
+                                <p class="title">104薪資情報：</p>
+                                <p><a href="https://guide.104.com.tw/salary/job/2005003008?analyze=mix&salary=monthly&utm_source=collego&utm_medium=major" target="_blank"> 4.5萬～7.0萬/醫藥業務代表</a></p>
+                            </div>
+                        </div>
+
+                        <p class="title title2">工程／研發／生技</p>
+                        <div class="infoBookmark">
+                            <div class="buttonArea">
+                                <button class="labelButton labelButtonActive"
+                                    onclick="setBookmark(this, 'job2')">醫藥研發人員</button>
+                                <button class="labelButton" onclick="setBookmark(this, 'job3')">病理藥理研究人員</button>
+                                <button class="labelButton" onclick="setBookmark(this, 'job4')">實驗化驗人員</button>
+                            </div>
+                            <div class="contentArea">
+                                <p class="title">性格特質：</p>
+                                <p>對醫療藥品的特性、療效、保存進行研究，並從事藥品研發，製造新藥、製劑、診斷用藥等的醫藥相關物品。</p>
+                                <p class="title">104薪資情報：</p>
+                                <p><a href="https://guide.104.com.tw/salary/job/2008003002?analyze=mix&salary=monthly&utm_source=collego&utm_medium=major" target="_blank"> 4.5萬～7.0萬/醫藥研發人員</a></p>
+                            </div>
+                        </div>
+
+                        <p class="title title2">教育/學術/研究</p>
+                        <div class="infoBookmark">
+                            <div class="buttonArea">
+                                <button class="labelButton labelButtonActive"
+                                    onclick="setBookmark(this, 'job5')">教授／副教授／助理教</button>
+                                <button class="labelButton" onclick="setBookmark(this, 'job6')">醫學研究人員</button>
+                                <!-- 擴充方式同上，setBookmark(this, '標籤')避免一樣的標籤名稱 -->
+                            </div>
+                            <div class="contentArea">
+                                <!-- 這裡放載入的時候要顯示的，跟第一個標籤相同內容 -->
+                                <p class="title">性格特質：</p>
+                                <p>凡具有大專院校教授、副教授、助理教授的身分，從事大專院校教學、研究與推廣的工作</p>
+                                <p class="title">104薪資情報：</p>
+                                <p><a href="https://guide.104.com.tw/salary/job/2016002002?analyze=mix&salary=monthly&utm_source=collego&utm_medium=major" target="_blank">7.0萬～9.5萬/教授／副教授／助理教授</a>
+                            </div>
+                        </div>
+
+                        <p class="title title2">醫療／美容／生命</p>
+                        <div class="infoBookmark">
+                            <div class="buttonArea">
+                                <button class="labelButton labelButtonActive"
+                                    onclick="setBookmark(this, 'job7')">獸醫</button>
+                                <!-- 擴充方式同上，setBookmark(this, '標籤')避免一樣的標籤名稱 -->
+                            </div>
+                            <div class="contentArea">
+                                <!-- 這裡放載入的時候要顯示的，跟第一個標籤相同內容 -->
+                                <p class="title">性格特質：</p>
+                                <p>具有獸醫師資格，負責動物疾病的預防、診斷、處方、方劑製配、內外科治療及專業動物護理，以及動物及其產品公共衛生等有關工作人員。</p>
+                                <p class="title">104薪資情報：</p>
+                                <p><a href="https://guide.104.com.tw/salary/job/2015001007?analyze=mix&salary=monthly&utm_source=collego&utm_medium=major" target="_blank"> 4.5萬～6.5萬/獸醫師</a></p>
+                            </div>
+                        </div>
+                        `,
+                prepare: `<p class="title">核心素養</p>
+                        <img src="../images/圖片1.png">
+                        <p class="title">高中課程領域</p>
+                        <img src="../images/圖片2.png">
+                        <p class="title">加深加廣課程</p>
+                        <img src="../images/圖片3.png">
+                        `,
+                ability: `<p class="title">多元能力</p>
+                        <p><span class="hoverTarget"
+                            data-hint="能透過語文理解他人想法形成特定概念，且能說明特定想法或因果關係。">語文理解與表達</span>
+                        <span class="hoverTarget"
+                            data-hint="能識別、儲存、喚起多項資訊、數字、知識內容，且能以多種方式組合這些訊息間的差異與關聯。">記憶詮釋</span>
+                        <span class="hoverTarget"
+                            data-hint="能從散落的資訊中，快速分辨與覺察具有意義的訊息，且能歸納出要點、關聯、架構等概念。">快速知覺與總結</span>
+                        <span class="hoverTarget"
+                            data-hint="投入心力在特定訊息及排除外部干擾。">專注力</span></p>
+                        <p><span class="hoverTarget"
+                            data-hint="積極尋求新資訊用以掌握問題的前因、後果以及預期影響，並依據各環節選擇適合的學習行為。">主動學習</span>
+                        <span class="hoverTarget"
+                            data-hint="能在遠、近距離中能分辨、比較色彩差異，在不同光線強度下能觀察物體大小、距離、移動變化。">遠觀細察</span>
+                        <span class="hoverTarget"
+                            data-hint="能在有干擾的情況下專注於聲音來源，分辨音調、音量，並將不同強度的聲音轉為可辨讀的語句。">聽覺辨識</span>
+                        <span class="hoverTarget"
+                            data-hint="收集、評估自己或他人的表現，提出可改善及調整的方法或採取行動。">自省促進</span></p>
+                        <p><span class="hoverTarget"
+                            data-hint="覺察並理解他人的感受或想法，並調整自己的做法，配合他人來完成任務。">社會覺察與合作</span>
+                        <span class="hoverTarget"
+                            data-hint="提出觀點與他人商議或說服他人同意，以積極的態度引導他人，達成共識、目標，或解決困難。">說服協商</span>
+                        <span class="hoverTarget"
+                            data-hint="分析並預判問題的成因與後果，設想出合適的解決方法及使用的工具。">問題解決</span>
+                        <span class="hoverTarget"
+                            data-hint="能依據物體變化（如移動速度），快速地調整出肢體反應，或以運用手部與手指進行精細動作。">手工操作</span></p>
+                        <p><span class="hoverTarget"
+                            data-hint="能捕捉事物運作的規律或關聯性，歸納或是推演不同事物的差異或因果關係，並得到特定理解。">邏輯推理</span>
+                        <span class="hoverTarget"
+                            data-hint="能選擇適當的科學、數理知識或邏輯來思考問題，依據科學規律正確地推演出答案或排列資訊。">數理科學</span>
+                        <span class="hoverTarget"
+                            data-hint="運用不同觀點對問題進行理性分析，對問題的解決方法或結論，評估出優缺點、支持、反對的意見。">批判思考</span>
+                        <span class="hoverTarget"
+                            data-hint="能同時接收多個訊息，切換心力在不同的訊息組合。">同時多工</span></p>
+                        <p><span class="hoverTarget"
+                            data-hint="分配及運用可支配的資源，調配人力、物力、資源運作的合理性、平衡性，發揮預期效益。">資源管理</span>
+                        <span class="hoverTarget"
+                            data-hint="能覺察特定事件與觀念、理論之間的差異，且能對事物進行拆解、組合、重新詮釋，呈現新穎之處。">敏銳創造</span>
+                        <span class="hoverTarget"
+                            data-hint="能覺察環境、物體與自己的相對位置，辨別出方向、維度，想像物體在移動或重新排列後的外觀。">空間定向</span>
+                        <span class="hoverTarget"
+                            data-hint="分析特定需求並規劃合適的運作流程，運用技術調整、組裝、設定設備，讓設備及系統正常運作。">運作分析</span></p>
+                        <p><span class="hoverTarget"
+                            data-hint="能監控設備或系統，按程序運行、排除故障，且能進行修繕、更換零件，檢測產製成果的品質。">機械操作</span>
+                        <span class="hoverTarget"
+                            data-hint="評估與分析系統的運作方式、效能，考慮運作成本與效益，制定系統運作可改善或調整的方式。">系統運作</span></p>
+                        <img src="../images/圖片4.png" alt="">
+
+                        <p class="title">性格特質</p>
+                        <p><span class="hoverTarget"
+                            data-hint="常常追求事物的條理秩序，審慎確認事物的彼此關係，行事仔細考量後果。">深思力行</span>
+                        <span class="hoverTarget"
+                            data-hint="總是願意優先關照、包容他人的需求，在不同意見中尋求最大的合作可能，優先尋求團體的共同價值，信任團體成員的指引。">合作互助</span>
+                        <span class="hoverTarget"
+                            data-hint="常常主動提出特定見解，樂於付出活力與熱情投入特定問題、活動，引領他人的行動。">主動積極</span>
+                        <span class="hoverTarget"
+                            data-hint="總是正向樂觀的看待事物的發展，即使事件發展不如預期，也能保持接納、能看見正向價值，常常表現自在、不膽怯。">開朗活潑</span></p>
+                        <p><span class="hoverTarget"
+                            data-hint="常常樂於探索未知事物、能夠容忍陌生情境，樂於把困難視為一種挑戰，在探索、挑戰未知中偏好看見自己的成長。">探究冒險</span>
+                        <span class="hoverTarget"
+                            data-hint="常常對多種事物，表達熱情興趣，對於既有事物，進行拆解、重組，給予新的理解與觀點，並且喜愛創造出令人意想不到的新事物。">變通開創</span>
+                        <span class="hoverTarget"
+                            data-hint="總是願意關懷他人情緒與感受，樂於接納與照顧他人困擾與情緒，表現和藹友善、易於親近。">親和接納</span>
+                        <span class="hoverTarget"
+                            data-hint="總是表現活潑、傳遞熱情，主動參與活動，熱衷於與夥伴一同完成任務。">樂群敬業</span></p>
+                        <p><span class="hoverTarget"
+                            data-hint="總是相信自己能達成目標，會肯定自身的優勢、長處，面對挫敗能較好的調整情緒。">自信肯定</span>
+                        <span class="hoverTarget"
+                            data-hint="常常長時間專注投入於特定事物，排除干擾訊息，會對所承諾的事物，會負起責任目標、執行到底，享受追求成就。">堅毅負責</span></p>
+                        <img src="../images/圖片5.png">`,
+                schools: `<table>
+                            <tr>
+                                <th>學校</th>
+                                <th>系組名稱</th>
+                            </tr>
+                            <tr>
+                                <td>國立臺灣大學</td>
+                                <td><a href="https://collego.edu.tw/Highschool/DepartmentIntro?dept_id=001049" target="_blank">獸醫學系</a></td>
+                            </tr>
+                            <tr>
+                                <td>國立中興大學</td>
+                                <td><a href="https://collego.edu.tw/Highschool/DepartmentIntro?dept_id=003040" target="_blank">獸醫學系</a></td>
+                            </tr>
+                            <tr>
+                                <td>國立嘉義大學</td>
+                                <td><a href="https://collego.edu.tw/Highschool/DepartmentIntro?dept_id=100046" target="_blank">獸醫學系</a></td>
+                            </tr>
+                        </table>
+                        `,
+                experience: `<p class="title">認識動物的習性</p>
+                        <p>每一種動物都有不同的習性與生理特性，生病的動物也會和平常表現不同甚至具有攻擊性，多認識自己有興趣的動物，建構起屬於自己的動物知識庫。</p>
+                        <p class="title">認識疾病的傳播</p>
+                        <p>多注意各種動物、人類、人畜共通疾病相關的資訊，會發現許多人類的疾病起源或傳播也和動物有很大的關係，和人醫、公共衛生學家共同控制這些疾病也是獸醫的重要職責，也會是將來的生涯選擇之一。</p>
+                        <p class="title">每個科目都全力以赴</p>
+                        <p>獸醫，相當於其他物種的全方位了解，並且提供預防與治療、癒後的照護過程，需要你具備多方面的技能，尤其重視化學和生物學的基礎知識。另外也需要一些醫學作業的相關知識與技能。</p>
+                        <p class="title">增強英文能力</p>
+                        <p>獸醫領域需接觸許多英文專有名詞，這能讓你未來與同事、客戶等更有效地進行溝通和交流，建議你高中時期注重英文學習，特別是閱讀、寫作和溝通。</p>
+                        <p class="title">參加生物醫學活動</p>
+                        <p>你可以參加生物醫學相關或跨領域研究的學習活動，像是社團、線上課程、科學展覽活動等，這樣可以進一步了解相關領域的知識，以深入了解獸醫領域的發展趨勢。</p>
+                        <p class="title">培養臨床研究的精神</p>
+                        <p>你可以利用探討的方式進行某一主題的深入研究，特別是在生物學領域上，像是細胞的結構、物種的起源，並透過師長的指導與討論，進行實驗檢驗假設，讓你在高中就能夠培養出臨床研究所需的探究能力。</p>
+                        `
+                //名字要一樣: `<p>xxxx</p>` p.s.前一行結尾記得加[ , ]
+            }
+
+            content.innerHTML = contentMap[contentKey]
+        }
+
+        function setBookmark(clickedButton, contentKey) {
+            const contentMap = {
+                job1: `
+                        <p class="title">性格特質：</p>
+                        <p>負責公司醫療器材產品與各類藥品之業務推廣。</p>
+                        <p class="title">104薪資情報：</p>
+                        <p><a href="https://guide.104.com.tw/salary/job/2005003008?analyze=mix&salary=monthly&utm_source=collego&utm_medium=major" target="_blank"> 4.5萬～7.0萬/醫藥業務代表</a></p>`,
+                job2: `
+                        <p class="title">性格特質：</p>
+                        <p>對醫療藥品的特性、療效、保存進行研究，並從事藥品研發，製造新藥、製劑、診斷用藥等的醫藥相關物品。</p>
+                        <p class="title">104薪資情報：</p>
+                        <p><a href="https://guide.104.com.tw/salary/job/2008003002?analyze=mix&salary=monthly&utm_source=collego&utm_medium=major" target="_blank"> 4.5萬～7.0萬/醫藥研發人員</a></p>`,
+                job3: `
+                        <p class="title">性格特質：</p>
+                        <p>進行病媒傳染病，診斷病源等相關病理、藥理領域的研究，並將成果應用在醫藥、保健、農業、工業等方面。</p>
+                        <p class="title">104薪資情報：</p>
+                        <p><a href="https://guide.104.com.tw/salary/job/2008003005?analyze=mix&salary=monthly&utm_source=collego&utm_medium=major" target="_blank">4.1萬～5.0萬/病理藥理研究人員</a></p>`,
+                job4: `
+                        <p class="title">性格特質：</p>
+                        <p>應用化學知識，從事科學試驗、檢驗、分析、化驗儀器操作等工作。</p>
+                        <p class="title">104薪資情報：</p>
+                        <p><a href="https://guide.104.com.tw/salary/job/2008002005?analyze=mix&salary=monthly&utm_source=collego&utm_medium=major" target="_blank"> 3.5萬～4.6萬/實驗化驗人員</a>`,
+                job5: `
+                        <p class="title">性格特質：</p>
+                        <p>凡具有大專院校教授、副教授、助理教授的身分，從事大專院校教學、研究與推廣的工作</p>
+                        <p class="title">104薪資情報：</p>
+                        <p><a href="https://guide.104.com.tw/salary/job/2016002002?analyze=mix&salary=monthly&utm_source=collego&utm_medium=major" target="_blank">7.0萬～9.5萬/教授／副教授／助理教授</a>`,
+                job6: `
+                        <p class="title">性格特質：</p>
+                        <p>從事生物、醫學、臨床試驗等領域的生物資料統計、研究分析、檢驗成效之人員。</p>
+                        <p class="title">104薪資情報：</p>
+                        <p><a href="https://guide.104.com.tw/salary/job/2008003002?analyze=mix&salary=monthly&utm_source=collego&utm_medium=major" target="_blank"> 4.5萬～7.0萬/醫藥研發人員</a>`,
+                job7: `
+                        <p class="title">性格特質：</p>
+                        <p>具有獸醫師資格，負責動物疾病的預防、診斷、處方、方劑製配、內外科治療及專業動物護理，以及動物及其產品公共衛生等有關工作人員。</p>
+                        <p class="title">104薪資情報：</p>
+                        <p><a href="https://guide.104.com.tw/salary/job/2015001007?analyze=mix&salary=monthly&utm_source=collego&utm_medium=major" target="_blank"> 4.5萬～6.5萬/獸醫師</a></p>`,
+                
+                IS: `<p>喜歡觀察紀錄事物，行為與思考有時以研究規劃為導向，關懷生命，有興趣於生物及人類行為的研究並與別人討論。頗熱衷人際關係的問題或新的管理方式，在工作時常會提出問題解決方案，但不喜歡扮演決策或執行的角色。喜歡融入人群，樂觀而不喜歡競爭，人際關係良好，擅於傾聽與幫助別人，是個好的支援者。</p>`,
+                IR: `<p>喜歡手腦並用、追根究底、有效率地完成工作或實驗。會去觀察別人做事的方法，並以邏輯分析的方式，深思熟慮、有系統地解決問題，或製造新的物品。較偏重於研究或新產品的開發，處理問題常有獨到的見解，不喜歡受別人的指揮或干涉。喜歡自然科學，由於注重本身智能的成長，喜歡接近令他們感興趣的專業人士，以獲得學習的機會，對自己喜歡的事物會全心投入學習。不刻意追求冒險、較不喜歡擔任領導或依規定太多的工作。有時會顯得猶豫不決，也不喜歡頻繁的人際活動，不太在乎別人的看法，但若遇爭執時，會願意配合多數人的意見而妥協。</p>`,
+                AI: `<p>直覺敏銳，興趣廣泛，不喜多言，為人隨興而致，喜歡從事抽象、設計創造等方面的工作，而對於依規章辦事的工作或固定上班的工作則較難接受。喜歡規劃，適合扮演顧問角色，能提出具有創意的評論，提供他人改進。對藝術方面或對數理實驗很有興趣，但對實際去解決問題的細節較無興趣，自己思考而不想受別人的指引，喜歡自由揮灑發揮藝術天份，生活的目的就是創造不平凡的事物。但有時陳義過高，無法一氣呵成。</p>`,
+                SR: `<p>喜歡與技術和服務相關的事物，與人相處還算融洽，關心自己和別人的感覺；由於同時對技術與人群都有興趣，所以志在機構及單位中，從事與教育訓練或服務客戶的工作；喜歡以團體教授的方式，協助他人學習及處理技術方面的問題。生活以實用為重，實事求是，著重解決眼前事務，較少憂慮未來的事。</p>`,
+            };
+
+            // 找到這個按鈕所屬的 infoBookmark 區塊
+            const infoBlock = clickedButton.closest('.infoBookmark');
+
+            // 移除該區塊內所有 tabButton 的 active
+            const buttons = infoBlock.querySelectorAll('.labelButton');
+            buttons.forEach(btn => btn.classList.remove('labelButtonActive'));
+            clickedButton.classList.add('labelButtonActive');
+
+            // 將對應內容寫入這個區塊的 contentArea
+            const contentArea = infoBlock.querySelector('.contentArea');
+            contentArea.innerHTML = contentMap[contentKey] || '';
+        }
+    </script>
+</head>
+
+<body>
+    <div id="tabContainer">
+        <!-- 一張標題圖片可放置，透明底建議 -->
+        <img src="../images/food.png" alt="">
+        <!-- 按鈕和內容綁定，調整內容上面js -->
+        <button type="button" class="tabButton" onclick="setActive(this, 'intro')">學類介紹</button>
+        <button type="button" class="tabButton" onclick="setActive(this, 'road')">生涯進路</button>
+        <button type="button" class="tabButton" onclick="setActive(this, 'prepare')">高中準備</button>
+        <button type="button" class="tabButton" onclick="setActive(this, 'ability')">能力特質</button>
+        <button type="button" class="tabButton" onclick="setActive(this, 'schools')">對應校系</button>
+        <button type="button" class="tabButton" onclick="setActive(this, 'experience')">學類體驗</button>
+        <!-- <button type="button" class="tabButton" onclick="setActive(this, '名字要一樣')">按鈕擴增範例</button> -->
+    </div>
+    <div id="content">
+        <p>移動到 <span class="hoverTarget" data-hint="這是提示填寫<br>使用br換行">這裡面的文字會控制hover效果</span></p>
+        <p> <span class="hoverTarget"
+                data-hint="營養只是食品的一部份，安全更不容忽視，本學類課程內容包含營養學，更具備食品加工 （製備） 與食品安全的理論、實作與應用課程。">食品只需重視營養說明 !?</span></p>
+
+    </div>
+    <div id="hint">
+        <p class="hint">
+        </p>
+    </div>
+</body>
+
+</html>
