@@ -1,0 +1,191 @@
+/*左側欄*/
+#tabContainer {
+    /*長寬設定*/
+    height: 80vh;
+    width: 15rem;
+    min-width: 15rem;
+    /*背景色票*/
+    background: var(--Secondary-Color);
+    /*綁定位置避免滾動*/
+    top: 10vh;
+    z-index: 999;
+    position: sticky;
+}
+
+/*左側欄圖片*/
+#tabContainer img {
+    /*寬度等寬*/
+    width: 11rem;
+    /*上下間距、左右間距*/
+    padding-block: 1rem;
+    padding-inline: 2rem;
+}
+
+/*左側欄按鈕*/
+#tabContainer button {
+    /*寬度填滿、高度設定*/
+    width: inherit;
+    height: 3.2rem;
+    /*文字大小、顏色*/
+    font-size: 1.2rem;
+    color: var(--Primary-Color);
+    /*背景色票*/
+    background: var(--Secondary-Color);
+}
+
+/*左側欄按鈕選中*/
+#tabContainer button.active {
+    /*文字顏色*/
+    color: var(--Secondary-Color);
+    /*背景色票*/
+    background: var(--Primary-Color);
+}
+
+/*右側內容區塊*/
+#content {
+    /*最小高度設定*/
+    min-height: 80vh;
+    /*左右文字距離*/
+    margin-inline: 3rem;
+    /*文字顏色設定*/
+    color: var(--Text-Color);
+    /*上下文字距離*/
+    padding-top: 7rem;
+    padding-bottom: 7rem;
+}
+
+/*內容標題粗體*/
+p.title {
+    font-weight: bolder;
+}
+
+p.title2 {
+    color: var(--Secondary-Text-Color);
+}
+
+/*內容圖片寬度*/
+#content img {
+    width: 70%;
+}
+
+/*滑鼠經過提示板*/
+#hint {
+    /*常態隱藏*/
+    display: none;
+    /*顯示方式*/
+    position: fixed;
+    /*長度寬度設定*/
+    width: 15em;
+    height: 9rem;
+    /*背景顏色、圓角*/
+    background: var(--HintBoard-Color);
+    border-radius: 5px;
+    /*內部間距*/
+    padding-inline: 10px;
+}
+
+/*提示板內容*/
+#hint p.hint {
+    /*文字顏色、大小*/
+    color: var(--Text-Color);
+    font-size: 0.8rem;
+}
+
+/*提示區域文字背景色*/
+span.hoverTarget {
+    /*背景漢文字左右距離*/
+    padding-inline: 5px;
+    /*背景圓角*/
+    border-radius: 3px;
+    /*背景顏色*/
+    background: var(--Hover-BG-Color);
+}
+
+/*標籤切換式區塊*/
+div.infoBookmark {
+    /*長寬設定*/
+    width: 900px;
+    height: 200px;
+    /*圓角設定*/
+    border-radius: 15px;
+    /*背景顏色*/
+    background: var(--Label-Contect-BG-Color);
+    /*超出的內容隱藏*/
+    overflow: hidden;
+    /*和上下文間距*/
+    margin-block: 10px;
+}
+
+/*按鈕區塊背景色*/
+div.buttonArea {
+    background: var(--Label-BG-Color);
+}
+
+/*文字區塊*/
+div.contentArea p {
+    /*上下、左右間距*/
+    margin-block: 8px;
+    margin-inline: 16px;
+    /*文字大小*/
+    font-size: 0.8rem;
+    color: var(--Secondary-Text-Color);
+}
+
+/*標籤按鈕*/
+button.labelButton {
+    /*文字內收間距*/
+    padding-inline: 20px;
+    padding-block: 7px;
+    color: white;
+    /*背景顏色*/
+    background: var(--Label-BG-Color);
+    /*左上右上圓角*/
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+}
+
+/*標籤按鈕點擊*/
+button.labelButtonActive {
+    background: var(--Label-Contect-BG-Color);
+    color: var(--Secondary-Text-Color);
+    font-weight: bolder;
+}
+
+/*標籤內文-連結文字色*/
+div.contentArea a {
+    color: var(--Label-BG-Color);
+}
+
+div.contentArea a:hover {
+    color: white;
+}
+
+table {
+    border-collapse: collapse;
+    background-color: var(--Label-Contect-BG-Color);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    overflow: hidden;
+}
+
+table a {
+    color: var(--Label-BG-Color);
+}
+
+table a:hover {
+    color: white;
+}
+
+th {
+    width: 25vw;
+    height: 2.5rem;
+    background-color: var(--Label-BG-Color);
+    color: white;
+}
+
+td {
+    width: 25vw;
+    height: 2rem;
+    text-align: center;
+
+}
