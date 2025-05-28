@@ -11,11 +11,9 @@
     <link rel="stylesheet" href="index.css">
 
     <script>
-        //控制畫面首次載入將第一個按鈕設定選中
         window.onload = function () {
             const firstButton = document.querySelector('.tabButton');
             if (firstButton) {
-                //'intro'要根據下面各個分頁的內容存放的類別改名
                 setActive(firstButton, 'intro');
             }
         }
@@ -24,8 +22,7 @@
             const hint = document.querySelector('#hint');
             const hintText = hint.querySelector('.hint');
             const contentContainer = document.querySelector('#content');
-
-            //使用事件委派處理 hover 效果，確保動態生成的元素也有效
+            效
             contentContainer.addEventListener('mouseover', (e) => {
                 const target = e.target.closest('.hoverTarget')
                 if (target) {
@@ -129,7 +126,7 @@
                         `,
                 subjects: `<p class="title">主要學類</p><p><a href="majors/獸醫.html" target="_blank">獸醫</a>  植物保護  生態  農藝  動物科學  園藝  森林  海洋資源  <a href="majors/食品生技.html" target="_blank">食品生技</a></p>
                         <p class="title">核心學科</p><p>生物   英語文   化學   國語文   數學  </p>                        `,
-                //名字要一樣: `<p>xxxx</p>` p.s.前一行結尾記得加[ , ]
+
             }
 
             content.innerHTML = contentMap[contentKey]
@@ -161,13 +158,10 @@
 
 <body>
     <div id="tabContainer">
-        <!-- 一張標題圖片可放置，透明底建議 -->
         <img src="images/logo.png" alt=" ">
-        <!-- 按鈕和內容綁定，調整內容上面js -->
         <button type="button" class="tabButton" onclick="setActive(this, 'intro')">簡要介紹</button>
         <button type="button" class="tabButton" onclick="setActive(this, 'traits')">能力特質</button>
         <button type="button" class="tabButton" onclick="setActive(this, 'subjects')">學類學科</button>
-        <!-- <button type="button" class="tabButton" onclick="setActive(this, '名字要一樣')">按鈕擴增範例</button> -->
     </div>
     <div id="content"></div>
     <div id="hint">

@@ -5,18 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- 這裡要改頁面標題 -->
     <title>學類 獸醫</title>
 
     <link rel="stylesheet" href="../global.css">
     <link rel="stylesheet" href="../index.css">
 
     <script>
-        //控制畫面首次載入將第一個按鈕設定選中
         window.onload = function () {
             const firstButton = document.querySelector('.tabButton');
             if (firstButton) {
-                //'intro'要根據下面各個分頁的內容存放的類別改名
                 setActive(firstButton, 'intro');
             }
         }
@@ -26,7 +23,6 @@
             const hintText = hint.querySelector('.hint')
             const contentContainer = document.querySelector('#content');
 
-            //使用事件委派處理 hover 效果，確保動態生成的元素也有效
             contentContainer.addEventListener('mouseover', (e) => {
                 const target = e.target.closest('.hoverTarget')
                 if (target) {
@@ -307,7 +303,6 @@
                         <p class="title">培養臨床研究的精神</p>
                         <p>你可以利用探討的方式進行某一主題的深入研究，特別是在生物學領域上，像是細胞的結構、物種的起源，並透過師長的指導與討論，進行實驗檢驗假設，讓你在高中就能夠培養出臨床研究所需的探究能力。</p>
                         `
-                //名字要一樣: `<p>xxxx</p>` p.s.前一行結尾記得加[ , ]
             }
 
             content.innerHTML = contentMap[contentKey]
@@ -350,7 +345,7 @@
                         <p>具有獸醫師資格，負責動物疾病的預防、診斷、處方、方劑製配、內外科治療及專業動物護理，以及動物及其產品公共衛生等有關工作人員。</p>
                         <p class="title">104薪資情報：</p>
                         <p><a href="https://guide.104.com.tw/salary/job/2015001007?analyze=mix&salary=monthly&utm_source=collego&utm_medium=major" target="_blank"> 4.5萬～6.5萬/獸醫師</a></p>`,
-                
+
                 IS: `<p>喜歡觀察紀錄事物，行為與思考有時以研究規劃為導向，關懷生命，有興趣於生物及人類行為的研究並與別人討論。頗熱衷人際關係的問題或新的管理方式，在工作時常會提出問題解決方案，但不喜歡扮演決策或執行的角色。喜歡融入人群，樂觀而不喜歡競爭，人際關係良好，擅於傾聽與幫助別人，是個好的支援者。</p>`,
                 IR: `<p>喜歡手腦並用、追根究底、有效率地完成工作或實驗。會去觀察別人做事的方法，並以邏輯分析的方式，深思熟慮、有系統地解決問題，或製造新的物品。較偏重於研究或新產品的開發，處理問題常有獨到的見解，不喜歡受別人的指揮或干涉。喜歡自然科學，由於注重本身智能的成長，喜歡接近令他們感興趣的專業人士，以獲得學習的機會，對自己喜歡的事物會全心投入學習。不刻意追求冒險、較不喜歡擔任領導或依規定太多的工作。有時會顯得猶豫不決，也不喜歡頻繁的人際活動，不太在乎別人的看法，但若遇爭執時，會願意配合多數人的意見而妥協。</p>`,
                 AI: `<p>直覺敏銳，興趣廣泛，不喜多言，為人隨興而致，喜歡從事抽象、設計創造等方面的工作，而對於依規章辦事的工作或固定上班的工作則較難接受。喜歡規劃，適合扮演顧問角色，能提出具有創意的評論，提供他人改進。對藝術方面或對數理實驗很有興趣，但對實際去解決問題的細節較無興趣，自己思考而不想受別人的指引，喜歡自由揮灑發揮藝術天份，生活的目的就是創造不平凡的事物。但有時陳義過高，無法一氣呵成。</p>`,
@@ -374,19 +369,15 @@
 
 <body>
     <div id="tabContainer">
-        <!-- 一張標題圖片可放置，透明底建議 -->
         <img src="../images/food.png" alt="">
-        <!-- 按鈕和內容綁定，調整內容上面js -->
         <button type="button" class="tabButton" onclick="setActive(this, 'intro')">學類介紹</button>
         <button type="button" class="tabButton" onclick="setActive(this, 'road')">生涯進路</button>
         <button type="button" class="tabButton" onclick="setActive(this, 'prepare')">高中準備</button>
         <button type="button" class="tabButton" onclick="setActive(this, 'ability')">能力特質</button>
         <button type="button" class="tabButton" onclick="setActive(this, 'schools')">對應校系</button>
         <button type="button" class="tabButton" onclick="setActive(this, 'experience')">學類體驗</button>
-        <!-- <button type="button" class="tabButton" onclick="setActive(this, '名字要一樣')">按鈕擴增範例</button> -->
     </div>
     <div id="content">
-        <p>移動到 <span class="hoverTarget" data-hint="這是提示填寫<br>使用br換行">這裡面的文字會控制hover效果</span></p>
         <p> <span class="hoverTarget"
                 data-hint="營養只是食品的一部份，安全更不容忽視，本學類課程內容包含營養學，更具備食品加工 （製備） 與食品安全的理論、實作與應用課程。">食品只需重視營養說明 !?</span></p>
 

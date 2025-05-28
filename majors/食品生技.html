@@ -5,18 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- 這裡要改頁面標題 -->
     <title>學類 食品生技</title>
 
     <link rel="stylesheet" href="../global.css">
     <link rel="stylesheet" href="../index.css">
 
     <script>
-        //控制畫面首次載入將第一個按鈕設定選中
         window.onload = function () {
             const firstButton = document.querySelector('.tabButton');
             if (firstButton) {
-                //'intro'要根據下面各個分頁的內容存放的類別改名
                 setActive(firstButton, 'intro');
             }
         }
@@ -26,7 +23,6 @@
             const hintText = hint.querySelector('.hint')
             const contentContainer = document.querySelector('#content');
 
-            //使用事件委派處理 hover 效果，確保動態生成的元素也有效
             contentContainer.addEventListener('mouseover', (e) => {
                 const target = e.target.closest('.hoverTarget')
                 if (target) {
@@ -335,7 +331,7 @@
                         <p class="title">參與實驗操作的流程</p>
                         <p>你可以透過參加課堂實驗、專題或其他學習活動，了解科學實驗的過程，包含主題的發想、基礎科學應用、實際操作驗證、成果撰寫等，有助於你未來進行自然科學的探究活動。</p>
                         `
-                //名字要一樣: `<p>xxxx</p>` p.s.前一行結尾記得加[ , ]
+
             }
 
             content.innerHTML = contentMap[contentKey]
@@ -407,19 +403,15 @@
 
 <body>
     <div id="tabContainer">
-        <!-- 一張標題圖片可放置，透明底建議 -->
         <a href="index.html"><img src="../images/food.png" alt=""></a>
-        <!-- 按鈕和內容綁定，調整內容上面js -->
         <button type="button" class="tabButton" onclick="setActive(this, 'intro')">學類介紹</button>
         <button type="button" class="tabButton" onclick="setActive(this, 'road')">生涯進路</button>
         <button type="button" class="tabButton" onclick="setActive(this, 'prepare')">高中準備</button>
         <button type="button" class="tabButton" onclick="setActive(this, 'ability')">能力特質</button>
         <button type="button" class="tabButton" onclick="setActive(this, 'schools')">對應校系</button>
         <button type="button" class="tabButton" onclick="setActive(this, 'experience')">學類體驗</button>
-        <!-- <button type="button" class="tabButton" onclick="setActive(this, '名字要一樣')">按鈕擴增範例</button> -->
     </div>
     <div id="content">
-        <p>移動到 <span class="hoverTarget" data-hint="這是提示填寫<br>使用br換行">這裡面的文字會控制hover效果</span></p>
         <p> <span class="hoverTarget"
                 data-hint="營養只是食品的一部份，安全更不容忽視，本學類課程內容包含營養學，更具備食品加工 （製備） 與食品安全的理論、實作與應用課程。">食品只需重視營養說明 !?</span></p>
 
